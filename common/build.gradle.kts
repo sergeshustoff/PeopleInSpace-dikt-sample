@@ -110,6 +110,7 @@ kotlin {
             //implementation(Deps.Test.kotlinTest)
             //implementation(Deps.Test.kotlinTestJUnit)
             implementation(Deps.Test.junit)
+            implementation(Deps.Test.mockk)
         }
 
         sourceSets["jvmMain"].dependencies {

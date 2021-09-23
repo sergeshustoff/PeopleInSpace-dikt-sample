@@ -20,6 +20,7 @@ object Versions {
     const val testCore = "1.3.0"
     const val mockito = "3.11.2"
     const val robolectric = "4.6.1"
+    const val mockk = "1.12.0"
 
     const val sqlDelight = "1.5.0"
     const val shadow = "7.0.0"
@@ -77,6 +78,7 @@ object Deps {
         const val mockito = "org.mockito:mockito-inline:${Versions.mockito}"
         const val robolectric = "org.robolectric:robolectric:${Versions.robolectric}"
         const val testCore = "androidx.test:core:${Versions.testCore}"
+        const val mockk = "io.mockk:mockk:${Versions.mockk}"
 
         const val kotlinTest = "org.jetbrains.kotlin:kotlin-test:${Versions.kotlin}"
         const val kotlinTestJUnit = "org.jetbrains.kotlin:kotlin-test-junit:${Versions.kotlin}"
