@@ -6,7 +6,6 @@ object Versions {
     const val kotlin = "1.5.30"
 
     const val kotlinCoroutines = "1.5.2-native-mt"
-    const val koin = "3.1.2"
     const val ktor = "1.6.3"
     const val kotlinxSerialization = "1.2.2"
     const val kotlinxHtmlJs = "0.7.3"
@@ -102,12 +101,9 @@ object Deps {
         const val accompanistNavigationAnimation =  "com.google.accompanist:accompanist-navigation-animation:${Versions.accompanist}"
     }
 
-    object Koin {
-        const val core = "io.insert-koin:koin-core:${Versions.koin}"
-        const val test = "io.insert-koin:koin-test:${Versions.koin}"
-        const val testJUnit4 = "io.insert-koin:koin-test-junit4:${Versions.koin}"
-        const val android = "io.insert-koin:koin-android:${Versions.koin}"
-        const val compose = "io.insert-koin:koin-androidx-compose:${Versions.koin}"
+    object Dikt {
+        const val version = "1.0.0-alpha6"
+        const val plugin = "io.github.sergeshustoff.dikt"
     }
 
     object Ktor {

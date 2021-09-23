@@ -19,14 +19,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberImagePainter
 import com.surrus.common.remote.Assignment
-import org.koin.androidx.compose.getViewModel
+import com.surrus.peopleinspace.di.AppModule
+import com.surrus.peopleinspace.util.moduleViewModel
 
 const val PersonListTag = "PersonList"
 
 @Composable
 fun PersonListScreen(paddingValues: PaddingValues = PaddingValues(),
      personSelected: (person: Assignment) -> Unit,
-     peopleInSpaceViewModel: PeopleInSpaceViewModel = getViewModel()
+     peopleInSpaceViewModel: PeopleInSpaceViewModel = moduleViewModel(AppModule::createVM)
 ) {
     val peopleState = peopleInSpaceViewModel.peopleInSpace.collectAsState()
 

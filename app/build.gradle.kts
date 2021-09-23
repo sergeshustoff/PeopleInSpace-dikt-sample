@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     kotlin("android")
     id("com.github.ben-manes.versions")
+    id(Deps.Dikt.plugin) version Deps.Dikt.version
 }
 
 android {
@@ -73,14 +74,6 @@ dependencies {
         implementation(coilCompose)
         implementation(accompanistNavigationAnimation)
         implementation(uiTooling)
-    }
-
-    with(Deps.Koin) {
-        implementation(core)
-        implementation(android)
-        implementation(compose)
-        testImplementation(test)
-        testImplementation(testJUnit4)
     }
 
     with(Deps.Test) {

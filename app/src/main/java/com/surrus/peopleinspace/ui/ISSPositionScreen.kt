@@ -18,8 +18,9 @@ import androidx.compose.ui.semantics.SemanticsPropertyReceiver
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.viewinterop.AndroidView
 import com.surrus.common.remote.IssPosition
+import com.surrus.peopleinspace.di.AppModule
 import com.surrus.peopleinspace.util.collectAsStateWithLifecycle
-import org.koin.androidx.compose.getViewModel
+import com.surrus.peopleinspace.util.moduleViewModel
 import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.CustomZoomButtonsController
 import org.osmdroid.views.MapView
@@ -32,7 +33,7 @@ val IssPositionKey = SemanticsPropertyKey<IssPosition>("IssPosition")
 var SemanticsPropertyReceiver.observedIssPosition by IssPositionKey
 
 @Composable
-fun ISSPositionScreen(peopleInSpaceViewModel: PeopleInSpaceViewModel = getViewModel()) {
+fun ISSPositionScreen(peopleInSpaceViewModel: PeopleInSpaceViewModel = moduleViewModel(AppModule::createVM)) {
 
     val lifecycleOwner = LocalLifecycleOwner.current
 

@@ -1,7 +1,7 @@
 package com.surrus.peopleinspace
 
-import com.surrus.common.di.initKoin
-import com.surrus.common.remote.PeopleInSpaceApi
+import com.surrus.common.di.CommonModule
+import com.surrus.common.repository.PlatformModuleImpl
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertTrue
 import org.junit.Test
@@ -9,8 +9,9 @@ import org.junit.Test
 class PeopleInSpaceTest {
     @Test
     fun testGetPeople() = runBlocking {
-        val koin = initKoin(enableNetworkLogs = true).koin
-        val peopleInSpaceApi = koin.get<PeopleInSpaceApi>()
+        //TODO: mock context?
+        val module = CommonModule(PlatformModuleImpl(TODO()), enableNetworkLogs = true)
+        val peopleInSpaceApi = module.api()
         val result = peopleInSpaceApi.fetchPeople()
         println(result)
         assertTrue(result.people.isNotEmpty())

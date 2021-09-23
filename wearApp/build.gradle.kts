@@ -40,11 +40,5 @@ dependencies {
         implementation(coilCompose)
     }
 
-    with(Deps.Koin) {
-        implementation(core)
-        implementation(android)
-        implementation(compose)
-    }
-
     implementation(project(":common"))
 }

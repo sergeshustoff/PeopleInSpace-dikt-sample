@@ -20,18 +20,16 @@ import androidx.wear.compose.material.Text
 import coil.compose.rememberImagePainter
 import com.surrus.common.remote.Assignment
 import com.surrus.common.repository.PeopleInSpaceRepositoryInterface
-import org.koin.android.ext.android.inject
 
 class MainActivity : ComponentActivity() {
-
-    private val peopleInSpaceRepository: PeopleInSpaceRepositoryInterface by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        val repository = (application as PeopleInSpaceApplication).module.repo()
         setContent {
             MaterialTheme {
-                PersonList(peopleInSpaceRepository) {
+                PersonList(repository) {
 
                 }
             }

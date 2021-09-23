@@ -1,26 +1,19 @@
 package com.surrus.peopleinspace
 
 import android.app.Application
-import co.touchlab.kermit.Kermit
-import com.surrus.common.di.initKoin
-import com.surrus.peopleinspace.di.appModule
-import org.koin.android.ext.koin.androidContext
-import org.koin.android.ext.koin.androidLogger
-import org.koin.core.component.KoinComponent
-import org.koin.core.component.inject
+import com.surrus.common.di.CommonModule
+import com.surrus.common.repository.PlatformModuleImpl
+import com.surrus.peopleinspace.di.AppModule
 
-class PeopleInSpaceApplication : Application(), KoinComponent {
-    private val logger: Kermit by inject()
+class PeopleInSpaceApplication : Application() {
+
+    val module by lazy {
+        AppModule(CommonModule(PlatformModuleImpl(this)))
+    }
 
     override fun onCreate() {
         super.onCreate()
 
-        initKoin {
-            androidLogger()
-            androidContext(this@PeopleInSpaceApplication)
-            modules(appModule)
-        }
-
-        logger.d { "PeopleInSpaceApplication" }
+        module.kermit().d { "PeopleInSpaceApplication" }
     }
 }

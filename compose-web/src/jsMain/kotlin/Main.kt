@@ -1,21 +1,17 @@
 import androidx.compose.runtime.*
-import com.surrus.common.di.initKoin
+import com.surrus.common.di.CommonModule
 import com.surrus.common.remote.Assignment
 import com.surrus.common.remote.IssPosition
-import com.surrus.common.repository.PeopleInSpaceRepository
-import com.surrus.common.repository.PeopleInSpaceRepositoryInterface
+import com.surrus.common.repository.PlatformModuleImpl
 import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.flow.collect
-import org.jetbrains.compose.common.foundation.layout.Column
 import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.*
 import org.jetbrains.compose.web.renderComposable
 
-private val koin = initKoin(enableNetworkLogs = true).koin
-
 @InternalCoroutinesApi
 fun main() {
-    val repo = koin.get<PeopleInSpaceRepositoryInterface>()
+    val repo = CommonModule(PlatformModuleImpl()).repo()
 
     renderComposable(rootElementId = "root") {
         Style(TextStyles)

@@ -18,9 +18,9 @@ import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.surrus.common.di.initKoin
+import com.surrus.common.di.CommonModule
 import com.surrus.common.remote.Assignment
-import com.surrus.common.remote.PeopleInSpaceApi
+import com.surrus.common.repository.PlatformModuleImpl
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.jetbrains.skia.Image.Companion.makeFromEncoded
@@ -31,13 +31,13 @@ import java.net.HttpURLConnection
 import java.net.URL
 import javax.imageio.ImageIO
 
-private val koin = initKoin(enableNetworkLogs = true).koin
+private val module = CommonModule(PlatformModuleImpl())
 
 fun main() = Window {
     var peopleState by remember { mutableStateOf(emptyList<Assignment>()) }
     var selectedPerson by remember { mutableStateOf<Assignment?>(null) }
 
-    val peopleInSpaceApi = koin.get<PeopleInSpaceApi>()
+    val peopleInSpaceApi = module.api()
 
     LaunchedEffect(true) {
         peopleState = peopleInSpaceApi.fetchPeople().people

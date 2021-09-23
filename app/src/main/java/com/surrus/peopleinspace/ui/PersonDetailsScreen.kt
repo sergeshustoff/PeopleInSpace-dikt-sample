@@ -10,11 +10,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
-import org.koin.androidx.compose.getViewModel
+import com.surrus.peopleinspace.di.AppModule
+import com.surrus.peopleinspace.util.moduleViewModel
 
 @Composable
 fun PersonDetailsScreen(personName: String, popBack: () -> Unit) {
-    val peopleInSpaceViewModel = getViewModel<PeopleInSpaceViewModel>()
+    val peopleInSpaceViewModel = moduleViewModel(AppModule::createVM)
 
     Scaffold(
         topBar = {

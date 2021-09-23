@@ -1,7 +1,8 @@
-import com.surrus.common.di.initKoin
+import com.surrus.common.di.CommonModule
 import com.surrus.common.remote.Assignment
 import com.surrus.common.remote.AstroResult
 import com.surrus.common.remote.PeopleInSpaceApi
+import com.surrus.common.repository.PlatformModuleImpl
 import io.ktor.application.*
 import io.ktor.features.*
 import io.ktor.http.*
@@ -12,8 +13,8 @@ import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 
 fun main() {
-    val koin = initKoin(enableNetworkLogs = true).koin
-    val peopleInSpaceApi = koin.get<PeopleInSpaceApi>()
+    val module = CommonModule(PlatformModuleImpl(), enableNetworkLogs = true)
+    val peopleInSpaceApi: PeopleInSpaceApi = module.api()
     peopleInSpaceApi.baseUrl = "http://api.open-notify.org"
 
     val port = System.getenv().getOrDefault("PORT", "8080").toInt()

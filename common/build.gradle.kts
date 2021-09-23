@@ -7,6 +7,7 @@ plugins {
     id("org.jetbrains.kotlin.native.cocoapods")
     id("com.squareup.sqldelight")
     id("com.chromaticnoise.multiplatform-swiftpackage") version "2.0.3"
+    id(Deps.Dikt.plugin) version Deps.Dikt.version
 }
 
 // CocoaPods requires the podspec to have a version.
@@ -90,11 +91,6 @@ kotlin {
             with(Deps.SqlDelight) {
                 implementation(runtime)
                 implementation(coroutineExtensions)
-            }
-
-            with(Deps.Koin) {
-                api(core)
-                api(test)
             }
 
             with(Deps.Log) {

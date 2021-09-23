@@ -3,14 +3,12 @@ package com.surrus.common.repository
 import co.touchlab.kermit.Kermit
 import com.squareup.sqldelight.runtime.coroutines.asFlow
 import com.squareup.sqldelight.runtime.coroutines.mapToList
-import com.surrus.common.di.PeopleInSpaceDatabaseWrapper
 import com.surrus.common.remote.Assignment
 import com.surrus.common.remote.IssPosition
 import com.surrus.common.remote.PeopleInSpaceApi
+import com.surrus.peopleinspace.db.PeopleInSpaceDatabase
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
-import org.koin.core.component.KoinComponent
-import org.koin.core.component.inject
 import kotlin.coroutines.CoroutineContext
 
 
@@ -20,13 +18,14 @@ interface PeopleInSpaceRepositoryInterface {
     suspend fun fetchPeople(): List<Assignment>
 }
 
-class PeopleInSpaceRepository : KoinComponent, PeopleInSpaceRepositoryInterface {
-    private val peopleInSpaceApi: PeopleInSpaceApi by inject()
-    private val logger: Kermit by inject()
+class PeopleInSpaceRepository(
+    private val peopleInSpaceApi: PeopleInSpaceApi,
+    private val logger: Kermit,
+    peopleInSpaceDatabase: PeopleInSpaceDatabase?
+) : PeopleInSpaceRepositoryInterface {
 
     private val coroutineScope: CoroutineScope = MainScope()
-    private val peopleInSpaceDatabase: PeopleInSpaceDatabaseWrapper by inject()
-    private val peopleInSpaceQueries = peopleInSpaceDatabase.instance?.peopleInSpaceQueries
+    private val peopleInSpaceQueries = peopleInSpaceDatabase?.peopleInSpaceQueries
 
     var peopleJob: Job? = null
 

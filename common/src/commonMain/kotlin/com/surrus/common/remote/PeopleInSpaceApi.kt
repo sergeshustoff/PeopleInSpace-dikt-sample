@@ -3,7 +3,6 @@ package com.surrus.common.remote
 import io.ktor.client.*
 import io.ktor.client.request.*
 import kotlinx.serialization.Serializable
-import org.koin.core.component.KoinComponent
 
 @Serializable
 data class AstroResult(val message: String, val number: Int, val people: List<Assignment>)
@@ -19,8 +18,8 @@ data class IssResponse(val message: String, val iss_position: IssPosition, val t
 
 class PeopleInSpaceApi(
     private val client: HttpClient,
-    var baseUrl: String = "https://people-in-space-proxy.ew.r.appspot.com",
-) : KoinComponent {
+) {
+    var baseUrl: String = "https://people-in-space-proxy.ew.r.appspot.com"
     suspend fun fetchPeople() = client.get<AstroResult>("$baseUrl/astros.json")
     suspend fun fetchISSPosition() = client.get<IssResponse>("$baseUrl/iss-now.json")
 }
