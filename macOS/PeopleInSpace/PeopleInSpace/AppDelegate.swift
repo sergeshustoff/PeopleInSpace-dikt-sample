@@ -15,12 +15,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     var window: NSWindow!
 
-
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        KoinKt.doInitKoin()
-        
+        let module = CommonModule(platformModule: PlatformModuleImpl(), enableNetworkLogs: false)
+
         // Create the SwiftUI view that provides the window contents.
-        let contentView = ContentView()
+        let contentView = ContentView(repository: module.repoImpl())
         
         // Create the window and set the content view. 
         window = NSWindow(

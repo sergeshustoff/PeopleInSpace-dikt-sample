@@ -2,7 +2,11 @@ import SwiftUI
 import common
 
 struct ContentView: View {
-    @ObservedObject var peopleInSpaceViewModel = PeopleInSpaceViewModel(repository: PeopleInSpaceRepository())
+    @ObservedObject var peopleInSpaceViewModel: PeopleInSpaceViewModel
+    
+    init(repository: PeopleInSpaceRepository) {
+        self.peopleInSpaceViewModel = PeopleInSpaceViewModel(repository: repository)
+    }
     
     var body: some View {
         

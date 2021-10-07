@@ -17,12 +17,27 @@ class CommonModule(
     private val platformModule: PlatformModule,
     private val enableNetworkLogs: Boolean = false
 ) {
-    private val json by lazy {
+    private val json: Json by lazy {
         Json { isLenient = true; ignoreUnknownKeys = true }
     }
 
     private val httpClient by lazy {
-        HttpClient {
+        createHttpClient(json, enableNetworkLogs)
+    }
+
+    val kermit by lazy {
+        Kermit(platformModule.logger)
+    }
+
+    @CreateSingle fun api(): PeopleInSpaceApi
+
+    @CreateSingle fun repoImpl(): PeopleInSpaceRepository
+
+    fun repo(): PeopleInSpaceRepositoryInterface = repoImpl()
+
+    companion object {
+
+        private fun createHttpClient(json: Json, enableNetworkLogs: Boolean) = HttpClient {
             install(JsonFeature) {
                 serializer = KotlinxSerializer(json)
             }
@@ -34,14 +49,4 @@ class CommonModule(
             }
         }
     }
-
-    val kermit by lazy {
-        Kermit(platformModule.logger)
-    }
-
-    @CreateSingle fun api(): PeopleInSpaceApi
-
-    @CreateSingle private fun repoImpl(): PeopleInSpaceRepository
-
-    fun repo(): PeopleInSpaceRepositoryInterface = repoImpl()
 }
