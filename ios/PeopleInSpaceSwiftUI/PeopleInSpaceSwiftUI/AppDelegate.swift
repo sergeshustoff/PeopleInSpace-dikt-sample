@@ -4,10 +4,9 @@ import common
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
+	static let module: CommonModule = CommonModule(platformModule: PlatformModuleImpl(), enableNetworkLogs: false)
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        KoinKt.doInitKoin()
         return true
     }
 

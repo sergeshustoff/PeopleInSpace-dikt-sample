@@ -4,8 +4,12 @@ import common
 
 
 struct ContentView: View {
-    @StateObject var viewModel = PeopleInSpaceViewModel(repository: PeopleInSpaceRepository())
+    @ObservedObject var viewModel: PeopleInSpaceViewModel
 
+    init(repository: PeopleInSpaceRepository) {
+        self.viewModel = PeopleInSpaceViewModel(repository: repository)
+    }
+    
     var body: some View {
         TabView {
             PeopleListView(viewModel: viewModel)
@@ -77,6 +81,6 @@ struct PersonDetailsView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView(repository: AppDelegate.module.repoImpl())
     }
 }
